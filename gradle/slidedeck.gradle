@@ -1,0 +1,47 @@
+apply plugin: "org.asciidoctor.jvm.revealjs"
+apply plugin: "org.asciidoctor.decktape"
+
+repositories {
+    mavenCentral()
+    ruby { gems() }
+}
+
+revealjs {
+    version = '3.1.0'
+
+    templateGitHub {
+        organisation = 'hakimel'
+        repository = 'reveal.js'
+        tag = '3.9.1'
+    }
+}
+
+asciidoctorRevealJs {
+    revealjsOptions { o ->
+        o.controls = false
+        overviewMode = true
+        progressBar = true
+        pushToHistory = true
+        customTheme = "build/sass/netflix.css"
+        verticalCenter = false
+    }
+}
+
+task copyStyles(dependsOn: ':stylesheet:sassCompile') {
+    doLast {
+        copy {
+            from "${rootDir}/stylesheet/build/sass"
+            into "build/sass"
+        }
+        copy {
+            from "${rootDir}/stylesheet/src/main/sass"
+            into "${buildDir}/docs/asciidocRevealJs/style"
+        }
+    }
+}
+
+tasks.asciidoctorRevealJs.dependsOn('copyStyles')
+tasks.asciidoctorRevealJs.doLast {
+    println "Open ${buildDir}/docs/asciidocRevealJs/index.html"
+}
+tasks.build.dependsOn('asciidoctorRevealJs')

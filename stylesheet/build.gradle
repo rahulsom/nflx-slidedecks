@@ -1,0 +1,51 @@
+plugins {
+    id("it.tellnet.sass").version("1.2")
+}
+
+apply plugin: "org.asciidoctor.jvm.revealjs"
+
+task buildStyles {
+    doLast {
+        def revealLocation = revealjs.templateProvider.get()
+        copy {
+            from "${revealLocation}/css/theme"
+            into "${buildDir}/scss"
+        }
+        copy {
+            from "${projectDir}/src/main/sass"
+            into "${buildDir}/scss/source"
+        }
+        copy {
+            from "${projectDir}/src/main/sass"
+            into "${buildDir}/docs/asciidocRevealJs/style"
+        }
+        copy {
+            from tarTree('nflx/font.tgz')
+            into "${buildDir}/scss"
+            rename {
+                it.replace('.css', '.scss')
+            }
+        }
+        copy {
+            from tarTree('nflx/font.tgz')
+            into "${buildDir}/docs/asciidocRevealJs"
+        }
+    }
+    inputs.property('revealLocation', revealjs.templateProvider)
+    inputs.dir("nflx")
+    inputs.dir("${projectDir}/src/main/sass")
+    outputs.dir("${buildDir}/scss")
+    outputs.dir("${buildDir}/docs/asciidocRevealJs")
+}
+
+sass {
+    sassDir = "${buildDir}/scss/source"
+}
+
+tasks.sassCompile.with {
+    it.dependsOn('buildStyles')
+    it.inputs.dir("${buildDir}/scss")
+    it.outputs.dir("${buildDir}/sass")
+}
+
+tasks.build.dependsOn('sassCompile')
