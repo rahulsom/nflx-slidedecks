@@ -36,3 +36,18 @@ ul.none {
   left: 1em;
   color: #888;
 }
+
+.reveal section img {
+  background: none;
+  box-shadow: 0 0 #FFF;
+}
+
+.reveal tbody img {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.reveal table th, .reveal table td {
+  border-bottom-color: #dedede;
+}
+
