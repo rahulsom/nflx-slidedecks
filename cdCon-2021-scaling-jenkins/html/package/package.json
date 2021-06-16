@@ -1,0 +1,21 @@
+{
+  "name": "netflix-sans",
+  "version": "1.0.0",
+  "title": "Netflix Sans",
+  "description": "Netflix Sans CSS",
+  "main": "netflix-sans.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.corp.netflix.com:7999/~rmcvey/netflix-sans.git"
+  },
+  "keywords": [
+    "Netflix",
+    "Sans",
+    "netflix-sans",
+    "fonts"
+  ],
+  "author": "Rob McVey <rmcvey@netflix.com>"
+}
