@@ -27,6 +27,13 @@ asciidoctorRevealJs {
     }
 }
 
+asciidoctorj {
+    modules {
+        diagram.use()
+    }
+    attributes 'includedir': "${projectDir}/src/docs/asciidoc"
+}
+
 task copyStyles(dependsOn: ':stylesheet:sassCompile') {
     doLast {
         copy {
@@ -38,6 +45,10 @@ task copyStyles(dependsOn: ':stylesheet:sassCompile') {
             into "${buildDir}/docs/asciidocRevealJs/style"
         }
     }
+    inputs.dir("${rootDir}/stylesheet/build/sass")
+    inputs.dir("${rootDir}/stylesheet/src/main/sass")
+    outputs.dir("build/sass")
+    outputs.dir("${buildDir}/docs/asciidocRevealJs/style")
 }
 
 tasks.asciidoctorRevealJs.dependsOn('copyStyles')
