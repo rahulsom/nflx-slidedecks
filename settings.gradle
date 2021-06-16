@@ -13,3 +13,4 @@ include 'stylesheet'
 
 include 'cdCon-2021-scaling-jenkins'
 
+include 'pages'

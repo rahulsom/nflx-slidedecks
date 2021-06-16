@@ -1,1 +1,2 @@
 apply from: "$rootDir/gradle/slidedeck.gradle"
+project.description = '''cdCon 2021: How Netflix Autoscales CI'''
