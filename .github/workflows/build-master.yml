@@ -39,8 +39,10 @@ jobs:
         export PROJECT_ROOT=$PWD
         cd /tmp/
         tar xzvf $PROJECT_ROOT/stylesheet/nflx/font.tgz
-        mkdir -p ~/.fonts
-        cp -r package/fonts/* ~/.fonts/
+        mkdir -p ~/.local/share/fonts
+        cp -r package/fonts/*.ttf ~/.local/share/fonts
+        chmod 755 ~/.local/share/fonts
+        chmod 644 ~/.local/share/fonts/*.ttf
         fc-cache -f -v
 
     - name: Build with Gradle
