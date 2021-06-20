@@ -82,3 +82,8 @@ task copyToPages {
 
 tasks.build.dependsOn('asciidoctorRevealJsExport', 'copyToPages')
 tasks.getByPath(':pages:buildIndex').dependsOn(":${project.name}:copyToPages")
+
+asciidoctorRevealJsExport {
+  height = 1050
+  width = 1600
+}
