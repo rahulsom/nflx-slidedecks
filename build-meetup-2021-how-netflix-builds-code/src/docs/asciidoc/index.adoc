@@ -172,7 +172,7 @@ Many central teams support some subset of everyone whose role is Engineer or clo
 My team supports every one of them.
 --
 
-[transition=none-out]
+[transition=fade-out]
 == What are the tools like
 
 include::{includedir}/_tools.adoc[]
@@ -188,7 +188,7 @@ The paved road is not a sign of the importance of things.
 It mostly corresponds to the impact we can achieve as central teams.
 --
 
-[transition=none]
+[transition=fade]
 === What are the tools like
 
 include::{includedir}/_tools_oss.adoc[]
@@ -198,7 +198,7 @@ include::{includedir}/_tools_oss.adoc[]
 Many are open source.
 --
 
-[transition=none]
+[transition=fade]
 === What are the tools like
 
 include::{includedir}/_tools_commodity.adoc[]
@@ -208,7 +208,7 @@ include::{includedir}/_tools_commodity.adoc[]
 Some are commodity products that anyone can access.
 --
 
-[transition=none]
+[transition=fade]
 === What are the tools like
 
 include::{includedir}/_tools_internal.adoc[]
@@ -219,7 +219,7 @@ A few are internal tools, but there isn't too much that should be inaaccessble t
 There are similar open-source and commercial solutions available if you choose to take inspiration from this.
 --
 
-[transition=none]
+[transition=fade]
 === What are the tools like
 
 include::{includedir}/_tools_path.adoc[]
@@ -230,7 +230,7 @@ For the purpose of this talk, let's take this path.
 We'll see briefly what all the tools look like but spend more time on this one path.
 --
 
-[transition=none]
+[transition=fade]
 === The Java Path
 
 include::{includedir}/_tools_gradle.adoc[]
@@ -247,7 +247,7 @@ Maven brough some structure using its repository structure and lifecycle phases.
 Gradle brings in structure using its Directed Acyclical Graph and a very simple plugin model.
 --
 
-[transition=none]
+[transition=fade]
 === The Java Path
 
 include::{includedir}/_tools_nebula.adoc[]
@@ -275,7 +275,7 @@ It also configures publishing correctly.
 Most teams apply `netflix.nebula` to their `allProjects` block and then add just a simpler plugin on each sub project - e.g. a Springboot plugin or a java library plugin.
 --
 
-[transition=none]
+[transition=fade]
 === The Node Path
 
 include::{includedir}/_tools_node.adoc[]
@@ -286,7 +286,7 @@ If you're developing a Node app, it's very likely you're building with npm.
 And we have a `devDependency` for something similar to `netflix.nebula` that does some of the same things for Node/NPM.
 --
 
-[transition=none]
+[transition=fade]
 === Version Control
 
 include::{includedir}/_tools_stash.adoc[]
@@ -307,7 +307,7 @@ However, when you release your `user-service`, you might be releasing the `user-
 So those two would belong in the same repository as the `user-service`.
 --
 
-[transition=none]
+[transition=fade]
 === The CI Phase
 
 include::{includedir}/_tools_jenkins.adoc[]
@@ -318,7 +318,7 @@ Once your commit occurs, it's time for Jenkins to pick up your code and build it
 Configuring everything correctly with Jenkins is hard for many engineers.
 --
 
-[transition=none]
+[transition=fade]
 === The CI Phase
 
 include::{includedir}/_tools_rocket.adoc[]
@@ -344,7 +344,7 @@ Rocket consumes that event and triggers a build.
 Whenever a build event occurs, Rocket emits that event on the SNS topic.
 --
 
-[transition=none]
+[transition=fade]
 === The CI Phase
 
 include::{includedir}/_tools_artifact.adoc[]
@@ -357,7 +357,7 @@ Sometimes, it is even just be a tar file.
 
 --
 
-[transition=none]
+[transition=fade]
 === The CI Phase
 
 include::{includedir}/_tools_artifactory.adoc[]
@@ -373,7 +373,7 @@ However, it's more likely that you're building a service and need to deploy it s
 When an artifact is published to artifactory, our plugin there emits an event.
 --
 
-[transition=none]
+[transition=fade]
 === The CI Phase
 
 include::{includedir}/_tools_ci_spin.adoc[]
@@ -384,7 +384,7 @@ Spinnaker could consume either the build event or the artifact event, and begin 
 We are going to choose the artifact event for this talk.
 --
 
-[transition=none]
+[transition=fade]
 === More CI tasks
 
 &nbsp;
@@ -403,7 +403,7 @@ Some kinds of changes are routine enough that we have enough confidence to merge
 Examples of these are tool version upgrades, dependency updates, and lint fixes.
 --
 
-[transition=none]
+[transition=fade]
 === The CD Phase
 
 include::{includedir}/_tools_spin.adoc[]
@@ -413,7 +413,7 @@ include::{includedir}/_tools_spin.adoc[]
 For a long time, the way to do CD in Spinnaker was to define a pipeline.
 --
 
-[transition=none]
+[transition=fade]
 === The CD Phase
 
 include::{includedir}/_tools_md.adoc[]
@@ -432,7 +432,7 @@ Depending on what you're building, you might either deploy to Titus - if it's a 
 If it's not, it's very likely, you're deploying to EC2.
 --
 
-[transition=none]
+[transition=fade]
 === Operating
 
 include::{includedir}/_tools_operating.adoc[]
@@ -445,7 +445,7 @@ These send metrics to the Atlas service.
 From there, it can be used to trigger alerts, or create dashboards.
 --
 
-[transition=none]
+[transition=fade]
 === Operating
 
 include::{includedir}/_tools_astrid.adoc[]
@@ -469,7 +469,7 @@ This can happen at any time.
 Our build tooling also has a way to check for this, and can prevent your builds from happening.
 --
 
-[transition=none]
+[transition=fade]
 === Too many tools?
 
 include::{includedir}/_tools.adoc[]
@@ -479,7 +479,7 @@ include::{includedir}/_tools.adoc[]
 As you can imagine setting up all of this for every project could be a huge task.
 --
 
-[transition=none]
+[transition=fade-in]
 === Newt
 
 include::{includedir}/_tools_newt.adoc[]
