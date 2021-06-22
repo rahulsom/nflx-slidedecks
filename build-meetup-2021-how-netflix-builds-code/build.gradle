@@ -1,0 +1,2 @@
+apply from: "$rootDir/gradle/slidedeck.gradle"
+project.description = '''Build Meetup 2021: How Netflix Builds Code'''

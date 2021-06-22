@@ -1,0 +1,33 @@
+[cols="1a,1a,1a,1a,1a,1a,1a,1a,1a,1a"]
+|===
+
+| image::images/duke.png[]
+|
+image::images/gradle.png[]
+image::images/nebula.png[]
+.2+|
+image::images/bitbucket.png[role=blur]
+.2+| image::images/jenkins.png[]
+image::images/rocket.svg[role=blur]
+.2+| image::images/package.png[]
+image::images/debian.png[]
+image::images/docker.png[]
+.2+|
+image::images/artifactory.png[role=blur]
+image::images/titus.png[]
+
+.2+| image::images/spinnaker.png[]
+image::images/managed-delivery.png[]
+
+.2+|
+image::images/aws-ec2.svg[role=blur]
+image::images/titus.png[]
+.2+|
+image::images/atlas.png[]
+image::images/alerts.png[role=blur]
+.2+| image::images/astrid.png[role=blur]
+
+| image::images/node.png[]
+| image::images/npm.png[]
+
+|===

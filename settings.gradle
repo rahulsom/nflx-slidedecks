@@ -12,5 +12,6 @@ rootProject.name = 'nflx-slidedecks'
 include 'stylesheet'
 
 include 'cdCon-2021-scaling-jenkins'
+include 'build-meetup-2021-how-netflix-builds-code'
 
 include 'pages'
