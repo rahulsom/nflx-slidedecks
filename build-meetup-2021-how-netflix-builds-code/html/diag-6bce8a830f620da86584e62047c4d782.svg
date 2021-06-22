@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' class='marks' width='200' height='200' viewBox='0 0 200 200' preserveAspectRatio='xMidYMid meet'>
+  <g fill='none' stroke-miterlimit='10' transform='translate(0,0)'>
+    <g class='mark-group role-frame root' role='graphics-object' aria-roledescription='group mark container'>
+      <g transform='translate(0,0)'>
+        <path class='background' aria-hidden='true' d='M0,0h200v200h-200Z'/>
+        <g>
+          <g class='mark-arc role-mark' role='graphics-symbol' aria-roledescription='arc mark container'>
+            <path transform='translate(100,100)' d='M6.123233995736766e-15,-100A100,100,0,0,1,61.477863357768115,-78.86997094562412L0,0Z' fill='#1f77b4'/>
+            <path transform='translate(100,100)' d='M61.477863357768115,-78.86997094562412A100,100,0,0,1,99.64347976829289,8.436642677380803L0,0Z' fill='#aec7e8'/>
+            <path transform='translate(100,100)' d='M99.64347976829289,8.436642677380803A100,100,0,0,1,-16.813128678718204,98.57646120668394L0,0Z' fill='#ff7f0e'/>
+            <path transform='translate(100,100)' d='M-16.813128678718204,98.57646120668394A100,100,0,0,1,-61.746243271190636,78.66003713382638L0,0Z' fill='#ffbb78'/>
+            <path transform='translate(100,100)' d='M-61.746243271190636,78.66003713382638A100,100,0,0,1,-96.80655258926953,-25.069730269410446L0,0Z' fill='#2ca02c'/>
+            <path transform='translate(100,100)' d='M-96.80655258926953,-25.069730269410446A100,100,0,0,1,0.6814640074771126,-99.99767800707431L0,0Z' fill='#98df8a'/>
+          </g>
+        </g>
+        <path class='foreground' aria-hidden='true' d='' display='none'/>
+      </g>
+    </g>
+  </g>
+</svg>
