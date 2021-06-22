@@ -34,6 +34,18 @@ jobs:
         distribution: 'zulu'
         java-version: '8'
 
+    - name: Install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.17.0'
+
+    - name: Install vega
+      run: |
+        npm install -g vega
+        npm install -g vega-lite
+        npm install -g vega-cli
+        npm install -g vega-embed
+
     - name: Install font
       run: |
         export PROJECT_ROOT=$PWD
