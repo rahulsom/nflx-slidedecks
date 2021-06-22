@@ -1,0 +1,442 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 100;
+	src: url(../package/fonts/netflix-sans-100.eot);
+	src: local("Netflix Sans Thin"), local("NetflixSans-Thin"), url(../package/fonts/netflix-sans-100.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-100.woff2) format("woff2"), url(../package/fonts/netflix-sans-100.woff) format("woff"), url(../package/fonts/netflix-sans-100.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 300;
+	src: url(../package/fonts/netflix-sans-300.eot);
+	src: local("Netflix Sans Light"), local("NetflixSans-Light"), url(../package/fonts/netflix-sans-300.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-300.woff2) format("woff2"), url(../package/fonts/netflix-sans-300.woff) format("woff"), url(../package/fonts/netflix-sans-300.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 400;
+	src: url(../package/fonts/netflix-sans-regular.eot);
+	src: local("Netflix Sans Regular"), local("NetflixSans-Regular"), url(../package/fonts/netflix-sans-regular.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-regular.woff2) format("woff2"), url(../package/fonts/netflix-sans-regular.woff) format("woff"), url(../package/fonts/netflix-sans-regular.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 600;
+	src: url(../package/fonts/netflix-sans-600.eot);
+	src: local("Netflix Sans SemiBold"), local("NetflixSans-SemiBold"), url(../package/fonts/netflix-sans-600.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-600.woff2) format("woff2"), url(../package/fonts/netflix-sans-600.woff) format("woff"), url(../package/fonts/netflix-sans-600.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 700;
+	src: url(../package/fonts/netflix-sans-700.eot);
+	src: local("Netflix Sans Bold"), local("NetflixSans-SemiBold"), url(../package/fonts/netflix-sans-700.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-700.woff2) format("woff2"), url(../package/fonts/netflix-sans-700.woff) format("woff"), url(../package/fonts/netflix-sans-700.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Netflix Sans";
+	font-style: normal;
+	font-weight: 800;
+	src: url(../package/fonts/netflix-sans-800.eot);
+	src: local("Netflix Sans Black"), local("NetflixSans-Black"), url(../package/fonts/netflix-sans-800.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-800.woff2) format("woff2"), url(../package/fonts/netflix-sans-800.woff) format("woff"), url(../package/fonts/netflix-sans-800.ttf) format("truetype");
+}
+
+/**
+ * White theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+	color: #fff;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+
+body {
+	background: #fff;
+	background-color: #fff;
+}
+
+.reveal {
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	font-size: 42px;
+	font-weight: normal;
+	color: #222;
+}
+
+::selection {
+	color: #fff;
+	background: #98bdef;
+	text-shadow: none;
+}
+
+::-moz-selection {
+	color: #fff;
+	background: #98bdef;
+	text-shadow: none;
+}
+
+.reveal .slides section, .reveal .slides section > section {
+	line-height: 1.3;
+	font-weight: inherit;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	margin: 0 0 20px 0;
+	color: #222;
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: normal;
+	text-transform: uppercase;
+	text-shadow: none;
+	word-wrap: break-word;
+}
+
+.reveal h1 {
+	font-size: 2.5em;
+}
+
+.reveal h2 {
+	font-size: 1.6em;
+}
+
+.reveal h3 {
+	font-size: 1.3em;
+}
+
+.reveal h4 {
+	font-size: 1em;
+}
+
+.reveal h1 {
+	text-shadow: none;
+}
+
+.reveal p {
+	margin: 20px 0;
+	line-height: 1.3;
+}
+
+.reveal img, .reveal video, .reveal iframe {
+	max-width: 95%;
+	max-height: 95%;
+}
+
+.reveal strong, .reveal b {
+	font-weight: bold;
+}
+
+.reveal em {
+	font-style: italic;
+}
+
+.reveal ol, .reveal dl, .reveal ul {
+	display: inline-block;
+	text-align: left;
+	margin: 0 0 0 1em;
+}
+
+.reveal ol {
+	list-style-type: decimal;
+}
+
+.reveal ul {
+	list-style-type: disc;
+}
+
+.reveal ul ul {
+	list-style-type: square;
+}
+
+.reveal ul ul ul {
+	list-style-type: circle;
+}
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+	display: block;
+	margin-left: 40px;
+}
+
+.reveal dt {
+	font-weight: bold;
+}
+
+.reveal dd {
+	margin-left: 40px;
+}
+
+.reveal blockquote {
+	display: block;
+	position: relative;
+	width: 70%;
+	margin: 20px auto;
+	padding: 5px;
+	font-style: italic;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+	display: inline-block;
+}
+
+.reveal q {
+	font-style: italic;
+}
+
+.reveal pre {
+	display: block;
+	position: relative;
+	width: 90%;
+	margin: 20px auto;
+	text-align: left;
+	font-size: 0.55em;
+	font-family: monospace;
+	line-height: 1.2em;
+	word-wrap: break-word;
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+	font-family: monospace;
+	text-transform: none;
+}
+
+.reveal pre code {
+	display: block;
+	padding: 5px;
+	overflow: auto;
+	max-height: 400px;
+	word-wrap: normal;
+}
+
+.reveal table {
+	margin: auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.reveal table th {
+	font-weight: bold;
+}
+
+.reveal table th, .reveal table td {
+	text-align: left;
+	padding: 0.2em 0.5em 0.2em 0.5em;
+	border-bottom: 1px solid;
+}
+
+.reveal table th[align="center"], .reveal table td[align="center"] {
+	text-align: center;
+}
+
+.reveal table th[align="right"], .reveal table td[align="right"] {
+	text-align: right;
+}
+
+.reveal table tbody tr:last-child th, .reveal table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.reveal sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+
+.reveal sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+
+.reveal small {
+	display: inline-block;
+	font-size: 0.6em;
+	line-height: 1.2em;
+	vertical-align: top;
+}
+
+.reveal small * {
+	vertical-align: top;
+}
+
+.reveal a {
+	color: #2a76dd;
+	text-decoration: none;
+	-webkit-transition: color 0.15s ease;
+	-moz-transition: color 0.15s ease;
+	transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+	color: #6ca0e8;
+	text-shadow: none;
+	border: none;
+}
+
+.reveal .roll span:after {
+	color: #fff;
+	background: #1a53a1;
+}
+
+.reveal section img {
+	margin: 15px 0px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 4px solid #222;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.reveal section img.plain {
+	border: 0;
+	box-shadow: none;
+}
+
+.reveal a img {
+	-webkit-transition: all 0.15s linear;
+	-moz-transition: all 0.15s linear;
+	transition: all 0.15s linear;
+}
+
+.reveal a:hover img {
+	background: rgba(255, 255, 255, 0.2);
+	border-color: #2a76dd;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+.reveal .controls {
+	color: #2a76dd;
+}
+
+.reveal .progress {
+	background: rgba(0, 0, 0, 0.2);
+	color: #2a76dd;
+}
+
+.reveal .progress span {
+	-webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+	-moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+	transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+@media print {
+	.backgrounds {
+		background-color: #fff;
+	}
+}
+
+ul.none {
+	list-style: none;
+}
+
+.reveal {
+	font-family: "Netflix Sans", "Source Sans Pro", Helvetica, sans-serif;
+	font-weight: 100;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	font-family: "Netflix Sans", "Source Sans Pro", Helvetica, sans-serif;
+	font-weight: 700;
+}
+
+.reveal code {
+	font-family: "Jetbrains Mono", "Fira Code", monospace;
+}
+
+.reveal section img {
+	border: none;
+	background: none;
+	box-shadow: 0 0 #FFF;
+}
+
+.reveal tbody .imageblock {
+	height: 80px;
+	width: 50px;
+}
+
+.reveal tbody .imageblock img {
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	max-height: 50px;
+	max-width: 50px;
+}
+
+.reveal .paragraph .image {
+	height: 120px;
+	width: 80px;
+}
+
+.reveal .paragraph .image img {
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	max-height: 80px;
+	max-width: 80px;
+}
+
+.reveal table th, .reveal table td {
+	border-bottom: none;
+}
+
+.reveal .attribution p {
+	position: fixed;
+	bottom: 5px;
+	background-color: rgba(255, 255, 0, 0.8);
+	font-size: 10px;
+	margin: 0;
+	padding: 5px;
+	right: 0;
+}
+
+table {
+	border: none !important;
+}
+
+table.tableblock {
+	border: none !important;
+}
+
+table td.tableblock {
+	border: none !important;
+}
+
+.footer {
+	background-image: url("Netflix_Symbol_RGB.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding-left: 2em;
+	padding-top: 0.5em;
+	padding-bottom: 0.3em;
+	font-size: 0.5em;
+	position: fixed;
+	bottom: 1em;
+	left: 1em;
+	color: #888;
+}
+
+section[data-background-image] h2 {
+	background-color: rgba(255, 255, 0, 0.8);
+	display: inline;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.blur {
+	filter: opacity(0.15);
+}
+
+.blur img {
+	filter: grayscale(1);
+}

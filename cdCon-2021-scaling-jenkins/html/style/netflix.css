@@ -338,10 +338,6 @@ ul.none {
 	list-style: none;
 }
 
-.reveal section img {
-	border: none;
-}
-
 .reveal {
 	font-family: "Netflix Sans", "Source Sans Pro", Helvetica, sans-serif;
 	font-weight: 100;
@@ -354,6 +350,66 @@ ul.none {
 
 .reveal code {
 	font-family: "Jetbrains Mono", "Fira Code", monospace;
+}
+
+.reveal section img {
+	border: none;
+	background: none;
+	box-shadow: 0 0 #FFF;
+}
+
+.reveal tbody .imageblock {
+	height: 80px;
+	width: 50px;
+}
+
+.reveal tbody .imageblock img {
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	max-height: 50px;
+	max-width: 50px;
+}
+
+.reveal .paragraph .image {
+	height: 120px;
+	width: 80px;
+}
+
+.reveal .paragraph .image img {
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	max-height: 80px;
+	max-width: 80px;
+}
+
+.reveal table th, .reveal table td {
+	border-bottom: none;
+}
+
+.reveal .attribution p {
+	position: fixed;
+	bottom: 5px;
+	background-color: rgba(255, 255, 0, 0.8);
+	font-size: 10px;
+	margin: 0;
+	padding: 5px;
+	right: 0;
+}
+
+table {
+	border: none !important;
+}
+
+table.tableblock {
+	border: none !important;
+}
+
+table td.tableblock {
+	border: none !important;
 }
 
 .footer {
@@ -370,32 +426,17 @@ ul.none {
 	color: #888;
 }
 
-.reveal section img {
-	background: none;
-	box-shadow: 0 0 #FFF;
-}
-
-.reveal tbody img {
-	max-height: 50px;
-	max-width: 50px;
-}
-
-.reveal table th, .reveal table td {
-	border-bottom-color: #dedede;
-}
-
 section[data-background-image] h2 {
-	background-color: yellow;
+	background-color: rgba(255, 255, 0, 0.8);
 	display: inline;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.reveal .attribution p {
-	position: fixed;
-	bottom: 5px;
-	background-color: rgba(255, 255, 0, 0.8);
-	font-size: 12px;
-	margin: 0;
-	padding: 5px;
+.blur {
+	filter: opacity(0.15);
+}
+
+.blur img {
+	filter: grayscale(1);
 }
