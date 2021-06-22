@@ -433,10 +433,6 @@ section[data-background-image] h2 {
 	padding-right: 10px;
 }
 
-.blur {
-	filter: opacity(0.15);
-}
-
 .blur img {
-	filter: grayscale(1);
+	filter: grayscale(1) opacity(0.15);
 }
