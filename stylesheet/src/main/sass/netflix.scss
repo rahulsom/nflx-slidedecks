@@ -115,8 +115,6 @@ section[data-background-image] {
 
 .blur {
   img {
-    filter: grayscale(1);
-    filter: blur(10px);
-    filter: opacity(0.15);
+    filter: grayscale(1) opacity(0.15);
   }
 }
