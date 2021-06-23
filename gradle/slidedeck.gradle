@@ -71,7 +71,7 @@ task copyToPages {
             into "${rootDir}/pages/build/staging/${project.name}/pdf"
         }
         file("${rootDir}/pages/build/staging/${project.name}").mkdirs()
-        file("${rootDir}/pages/build/staging/${project.name}/title.txt").text = project.description
+        file("${rootDir}/pages/build/staging/${project.name}/metadata.json").text = project.description
     }
     inputs.dir "build/docs/asciidocRevealJs"
     outputs.dir "${rootDir}/pages/build/staging/${project.name}/html"

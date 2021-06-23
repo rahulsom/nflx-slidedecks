@@ -1,2 +1,9 @@
+import groovy.json.JsonBuilder
+
+project.setDescription(new JsonBuilder([
+        date: '2021-06-25',
+        title: 'How Netflix Builds Code',
+        venue: 'Build Meetup',
+]).toString())
+
 apply from: "$rootDir/gradle/slidedeck.gradle"
-project.description = '''Build Meetup 2021: How Netflix Builds Code'''
