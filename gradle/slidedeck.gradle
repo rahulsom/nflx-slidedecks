@@ -86,4 +86,6 @@ tasks.getByPath(':pages:buildIndex').dependsOn(":${project.name}:copyToPages")
 asciidoctorRevealJsExport {
   height = 1050
   width = 1600
+  loadPause(10_000)
+  chromeArgs('--font-render-hinting=none')
 }
