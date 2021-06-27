@@ -1,53 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 100;
-	src: url(../package/fonts/netflix-sans-100.eot);
-	src: local("Netflix Sans Thin"), local("NetflixSans-Thin"), url(../package/fonts/netflix-sans-100.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-100.woff2) format("woff2"), url(../package/fonts/netflix-sans-100.woff) format("woff"), url(../package/fonts/netflix-sans-100.ttf) format("truetype");
-}
-
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 300;
-	src: url(../package/fonts/netflix-sans-300.eot);
-	src: local("Netflix Sans Light"), local("NetflixSans-Light"), url(../package/fonts/netflix-sans-300.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-300.woff2) format("woff2"), url(../package/fonts/netflix-sans-300.woff) format("woff"), url(../package/fonts/netflix-sans-300.ttf) format("truetype");
-}
-
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 400;
-	src: url(../package/fonts/netflix-sans-regular.eot);
-	src: local("Netflix Sans Regular"), local("NetflixSans-Regular"), url(../package/fonts/netflix-sans-regular.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-regular.woff2) format("woff2"), url(../package/fonts/netflix-sans-regular.woff) format("woff"), url(../package/fonts/netflix-sans-regular.ttf) format("truetype");
-}
-
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 600;
-	src: url(../package/fonts/netflix-sans-600.eot);
-	src: local("Netflix Sans SemiBold"), local("NetflixSans-SemiBold"), url(../package/fonts/netflix-sans-600.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-600.woff2) format("woff2"), url(../package/fonts/netflix-sans-600.woff) format("woff"), url(../package/fonts/netflix-sans-600.ttf) format("truetype");
-}
-
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 700;
-	src: url(../package/fonts/netflix-sans-700.eot);
-	src: local("Netflix Sans Bold"), local("NetflixSans-SemiBold"), url(../package/fonts/netflix-sans-700.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-700.woff2) format("woff2"), url(../package/fonts/netflix-sans-700.woff) format("woff"), url(../package/fonts/netflix-sans-700.ttf) format("truetype");
-}
-
-@font-face {
-	font-family: "Netflix Sans";
-	font-style: normal;
-	font-weight: 800;
-	src: url(../package/fonts/netflix-sans-800.eot);
-	src: local("Netflix Sans Black"), local("NetflixSans-Black"), url(../package/fonts/netflix-sans-800.eot?#iefix) format("embedded-opentype"), url(../package/fonts/netflix-sans-800.woff2) format("woff2"), url(../package/fonts/netflix-sans-800.woff) format("woff"), url(../package/fonts/netflix-sans-800.ttf) format("truetype");
-}
-
 /**
  * White theme for reveal.js. This is the opposite of the 'black' theme.
  *
