@@ -1,0 +1,16 @@
+= cdCon 2021 Talk: How Netflix Autoscales CI
+:experimental: true
+
+== Running
+
+1. First run
++
+[source,shell]
+----
+./gradlew build
+----
+
+2. Then open the generated `pages/build/staging/index.html` in your browser.
+3. Pick a slidedeck.
+4. On HTML Slidedecks, hit kbd:[s] to open speaker notes in a new window.
+  Hit kbd:[?] to see all shortcuts.
