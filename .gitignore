@@ -8,7 +8,7 @@
 /.idea_modules/
 
 # Gradle template
-/.gradle
+.gradle
 build/
 gradle-app.setting
 !gradle-wrapper.jar
@@ -17,4 +17,3 @@ gradle-app.setting
 # VSCode
 /.project
 /.settings
-

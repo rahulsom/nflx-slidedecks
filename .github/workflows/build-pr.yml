@@ -1,7 +1,7 @@
-name: Build Master
+name: Build PR
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 jobs:
@@ -60,9 +60,3 @@ jobs:
     - name: Build with Gradle
       run: |
         ./gradlew build --scan
-
-    - name: Deploy Github Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gh-pages
-        folder: pages/build/staging

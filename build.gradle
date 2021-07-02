@@ -1,5 +1,0 @@
-plugins {
-    id("org.asciidoctor.jvm.revealjs").version("3.3.2").apply(false)
-    id("org.asciidoctor.decktape").version("3.3.2").apply(false)
-}
-
