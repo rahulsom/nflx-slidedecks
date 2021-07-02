@@ -17,6 +17,7 @@ def toHtml(String k, Map<String, String> metadata) {
         </div>
     """
 }
+
 task buildIndex {
     doLast {
         def titles = file("build/staging").listFiles()
@@ -86,8 +87,10 @@ task buildIndex {
     }
 }
 
-task build {}
-tasks.build.dependsOn('buildIndex')
+task build {
+  dependsOn('buildIndex')
+}
+
 task clean {
     doLast {
         delete(buildDir)
