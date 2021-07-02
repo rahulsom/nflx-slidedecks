@@ -1,1 +1,5 @@
-{"date":"2021-06-24","title":"How Netflix Autoscales CI","venue":"cdCon"}
+{
+    "date": "2021-06-24",
+    "title": "How Netflix Autoscales CI",
+    "venue": "cdCon"
+}
