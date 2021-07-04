@@ -36,11 +36,11 @@ class SlidedeckPlugin implements Plugin<Project> {
     project.tasks.withType(AsciidoctorJRevealJSTask).configureEach {
       it.revealjsOptions { o ->
         o.controls = false
-        overviewMode = true
-        progressBar = true
-        pushToHistory = true
-        customTheme = "build/sass/netflix.css"
-        verticalCenter = false
+        o.overviewMode = true
+        o.progressBar = true
+        o.pushToHistory = true
+        o.customTheme = "build/sass/netflix.css"
+        o.verticalCenter = false
       }
     }
     project.tasks.withType(DeckTapeTask).configureEach {
@@ -101,7 +101,8 @@ class SlidedeckPlugin implements Plugin<Project> {
       dependsOn 'asciidoctorRevealJsExport'
     }
 
-    project.tasks.build.dependsOn('asciidoctorRevealJsExport', 'copyToPages')
+    project.tasks.getByName('build').dependsOn('asciidoctorRevealJsExport', 'copyToPages')
+    project.tasks.getByName('asciidoctorRevealJs').dependsOn('asciidoctorGemsPrepare')
     project.tasks.getByPath(':pages:buildIndex').dependsOn(":${project.name}:copyToPages")
   }
 }

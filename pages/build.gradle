@@ -1,98 +1,60 @@
-import java.time.Instant
+plugins {
+  id "org.asciidoctor.jvm.convert"
+}
+
+repositories {
+  mavenCentral()
+}
+
+asciidoctor {
+  sourceDir file('build/docs')
+}
+
 import groovy.json.JsonSlurper
 
-def toHtml(String k, Map<String, String> metadata) {
-    """
-        <div class="row mb-3">
-          <div class="col-8 themed-grid-col">
-            <h5>${metadata.title}</h5>
-            <p class="small">${metadata.venue}, ${metadata.date}</p>
-          </div>
-          <div class="col-2 themed-grid-col">
-            <a href="${k}/html/index.html">HTML</a>
-          </div>
-          <div class="col-2 themed-grid-col">
-            <a href="${k}/pdf/index.pdf">PDF</a>
-          </div>
-        </div>
-    """
-}
+import java.time.LocalDate
 
 task buildIndex {
-    doLast {
-        def titles = file("build/staging").listFiles()
-                .findAll {it.isDirectory()}
-                .collectEntries { [it.name, new JsonSlurper().parse(file("${it}/metadata.json"))] }
-                .toSorted {a, b -> b.value.date <=> a.value.date }
-        file("build/staging/index.html").text = """\
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Rahul Somasunderam">
-    <title>NFLX Slidedecks</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-        crossorigin="anonymous">
-    <style>
-      /* Sticky footer styles
-      -------------------------------------------------- */
-      html {
-        position: relative;
-        min-height: 100%;
-      }
-      body {
-        margin-bottom: 60px; /* Margin bottom by footer height */
-      }
-      .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60px; /* Set the fixed height of the footer here */
-        line-height: 60px; /* Vertically center the text there */
-        background-color: #f5f5f5;
-      }
+  doLast {
+    def titles = file("build/staging").listFiles()
+        .findAll { it.isDirectory() }
+        .collectEntries { [it.name, new JsonSlurper().parse(file("${it}/metadata.json"))] }
+        .toSorted { a, b -> b.value.date <=> a.value.date }
+        .groupBy { LocalDate.parse(it.value.date).year }
 
-      /* Custom page CSS
-      -------------------------------------------------- */
-      /* Not required for template or sticky footer method. */
+    file('build/docs').mkdirs()
+    PrintWriter writer = new PrintWriter(file('build/docs/index.adoc').newWriter())
+    writer.append """\
+# nflx-slidedecks
+:author: Rahul Somasunderam
+:experimental:
 
-      .container {
-        width: auto;
-        max-width: 680px;
-        padding: 0 15px;
-      }
-    </style>
-  </head>
-  <body class="py-4">
-    <main>
-      <div class="container">
-        <h1>NFLX Slidedecks</h1>
-        <p>&nbsp;</p>
-        ${titles.collect {k, v -> toHtml(k, v)}.join('\n')}
-      </div>
-    </main>
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <span class="text-muted">Built at ${Instant.now()}.</span>
-      </div>
-    </footer>
-  </body>
-</html>
+On HTML Slidedecks, hit kbd:[s] to open speaker notes in a new window.
+Hit kbd:[?] to see all shortcuts.
+
 """
-        println "Open ${buildDir}/staging/index.html"
+    titles.each {year, map ->
+      writer.println("## $year")
+      writer.println("")
+      writer.println('[cols="1a,2a,3a"]')
+      writer.println("|===")
+      map.each { k,v ->
+        writer.println("| ${v.date} | ${v.venue} | ${v.title} - link:${k}/html/index.html[HTML]")
+      }
+      writer.println("|===")
     }
+    writer.flush()
+    writer.close()
+  }
+  outputs.file('build/docs/index.adoc')
 }
 
-task build {
-  dependsOn('buildIndex')
-}
-
-task clean {
-    doLast {
-        delete(buildDir)
-    }
+tasks.asciidoctor.dependsOn('buildIndex')
+tasks.build.dependsOn('asciidoctor')
+tasks.build.doLast {
+  copy {
+    from('build/docs/asciidoc')
+    into('build/staging')
+  }
+  println "Open ${buildDir}/staging/index.html"
 }
