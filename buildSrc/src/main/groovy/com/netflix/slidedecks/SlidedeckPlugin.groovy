@@ -93,16 +93,19 @@ class SlidedeckPlugin implements Plugin<Project> {
         project.file("${rootDir}/pages/build/staging/${project.name}/metadata.json").text = extension.toJson()
       }
       inputs.property("slidedeckExtension", extension.toJson())
-      outputs.file(project.file("${rootDir}/pages/build/staging/${project.name}/metadata.json"))
       inputs.dir "build/docs/asciidocRevealJs"
-      outputs.dir "${rootDir}/pages/build/staging/${project.name}/html"
       inputs.dir "build/docs/asciidocRevealJsExport"
+
+      outputs.file("${rootDir}/pages/build/staging/${project.name}/metadata.json")
+      outputs.dir "${rootDir}/pages/build/staging/${project.name}/html"
       outputs.dir "${rootDir}/pages/build/staging/${project.name}/pdf"
+
       dependsOn 'asciidoctorRevealJsExport'
     }
 
     project.tasks.getByName('build').dependsOn('asciidoctorRevealJsExport', 'copyToPages')
     project.tasks.getByName('asciidoctorRevealJs').dependsOn('asciidoctorGemsPrepare')
     project.tasks.getByPath(':pages:buildIndex').dependsOn(":${project.name}:copyToPages")
+    project.tasks.getByPath(':pages:buildIndex').inputs.file("${project.rootDir}/pages/build/staging/${project.name}/metadata.json")
   }
 }

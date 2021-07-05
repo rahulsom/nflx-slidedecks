@@ -33,12 +33,12 @@ On HTML Slidedecks, hit kbd:[s] to open speaker notes in a new window.
 Hit kbd:[?] to see all shortcuts.
 
 """
-    titles.each {year, map ->
+    titles.each { year, map ->
       writer.println("## $year")
       writer.println("")
-      writer.println('[cols="1a,2a,3a"]')
+      writer.println('[cols="2a,3a,7a"]')
       writer.println("|===")
-      map.each { k,v ->
+      map.each { k, v ->
         writer.println("| ${v.date} | ${v.venue} | ${v.title} - link:${k}/html/index.html[HTML]")
       }
       writer.println("|===")
