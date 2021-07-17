@@ -16,12 +16,14 @@ class SlidedeckExtension {
   Property<LocalDate> date = project.objects.property(LocalDate)
   Property<String> title = project.objects.property(String)
   Property<String> venue = project.objects.property(String)
+  Property<String> video = project.objects.property(String)
 
   String toJson() {
     new JsonBuilder([
         date : date.getOrNull()?.toString(),
         title: title.getOrNull()?.toString(),
         venue: venue.getOrNull()?.toString(),
+        video: video.getOrNull()?.toString(),
     ]).toPrettyString()
   }
 }

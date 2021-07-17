@@ -6,4 +6,5 @@ slidedeck {
   date.set(LocalDate.parse('2021-06-24'))
   title.set('How Netflix Autoscales CI')
   venue.set('cdCon')
+  video.set('https://www.youtube.com/watch?v=LU8wYBWev_0')
 }
