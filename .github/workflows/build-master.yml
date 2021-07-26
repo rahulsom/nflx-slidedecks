@@ -55,11 +55,13 @@ jobs:
         cp -r package/fonts/*.ttf ~/.local/share/fonts
         chmod 755 ~/.local/share/fonts
         chmod 644 ~/.local/share/fonts/*.ttf
-        fc-cache -f -v
+        sudo apt-get update
+        sudo apt-get -yq install libatk1.0-0 libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 libasound2 xauth xvfb
+        sudo apt-get -yq install xfonts-utils
 
     - name: Build with Gradle
       run: |
-        ./gradlew build --scan
+        ./gradlew build --scan --stacktrace --info
 
     - name: Deploy Github Pages
       uses: JamesIves/github-pages-deploy-action@4.1.4
