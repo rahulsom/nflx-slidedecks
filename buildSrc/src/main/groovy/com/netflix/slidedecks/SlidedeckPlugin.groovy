@@ -13,6 +13,9 @@ class SlidedeckPlugin implements Plugin<Project> {
   @Override
   void apply(Project project) {
     def extension = project.extensions.create("slidedeck", SlidedeckExtension, project)
+    if (!extension.theme.isPresent()) {
+      extension.theme.set("netflix")
+    }
     project.plugins.apply(AsciidoctorDeckTapePlugin)
     project.plugins.apply(AsciidoctorRevealJSPlugin)
     project.repositories {
@@ -39,7 +42,7 @@ class SlidedeckPlugin implements Plugin<Project> {
         o.overviewMode = true
         o.progressBar = true
         o.pushToHistory = true
-        o.customTheme = "build/sass/netflix.css"
+        o.customTheme = "build/sass/${extension.theme.get()}.css"
         o.verticalCenter = false
       }
     }
