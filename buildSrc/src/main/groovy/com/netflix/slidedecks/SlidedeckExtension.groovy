@@ -17,6 +17,7 @@ class SlidedeckExtension {
   Property<String> title = project.objects.property(String)
   Property<String> venue = project.objects.property(String)
   Property<String> video = project.objects.property(String)
+  Property<String> theme = project.objects.property(String)
 
   String toJson() {
     new JsonBuilder([
