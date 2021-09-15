@@ -64,7 +64,7 @@ jobs:
         ./gradlew build --scan --stacktrace --info
 
     - name: Deploy Github Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
+      uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
         branch: gh-pages
         folder: pages/build/staging
