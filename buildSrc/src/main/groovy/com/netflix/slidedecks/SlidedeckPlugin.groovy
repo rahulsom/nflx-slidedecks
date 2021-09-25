@@ -50,7 +50,7 @@ class SlidedeckPlugin implements Plugin<Project> {
       height = 1050
       width = 1600
       loadPause = 10_000
-      chromeArgs('--font-render-hinting=none')
+      chromeArgs('--font-render-hinting=none', '--disable-remote-fonts')
     }
     project.tasks.create("copyStyles") {
       dependsOn(":stylesheet:sassCompile")
