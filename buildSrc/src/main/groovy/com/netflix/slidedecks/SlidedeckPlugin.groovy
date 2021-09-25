@@ -5,6 +5,7 @@ import org.asciidoctor.gradle.jvm.slides.AsciidoctorJRevealJSTask
 import org.asciidoctor.gradle.jvm.slides.AsciidoctorRevealJSPlugin
 import org.asciidoctor.gradle.jvm.slides.RevealJSExtension
 import org.asciidoctor.gradle.slides.export.decktape.AsciidoctorDeckTapePlugin
+import org.asciidoctor.gradle.slides.export.decktape.DeckTapeExtension
 import org.asciidoctor.gradle.slides.export.decktape.DeckTapeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -45,6 +46,10 @@ class SlidedeckPlugin implements Plugin<Project> {
         o.customTheme = "build/sass/${extension.theme.get()}.css"
         o.verticalCenter = false
       }
+    }
+    project.extensions.findByType(DeckTapeExtension).with {
+      it.puppeteerVersion = '1.20.0'
+      it.version = '2.11.0'
     }
     project.tasks.withType(DeckTapeTask).configureEach {
       height = 1050
