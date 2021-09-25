@@ -39,7 +39,7 @@ Hit kbd:[?] to see all shortcuts.
       writer.println('[cols="2a,3a,7a"]')
       writer.println("|===")
       map.each { k, v ->
-        writer.println("| ${v.date} | ${v.venue} | ${v.title} - link:${k}/html/index.html[HTML] - ${v.video}[Video]")
+        writer.println("| ${v.date} | ${v.venue} | ${v.title} - link:${k}/html/index.html[HTML] - link:${k}/pdf/index.pdf[PDF] - ${v.video}[Video]")
       }
       writer.println("|===")
     }
