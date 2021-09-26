@@ -57,6 +57,9 @@ jobs:
         chmod 644 ~/.local/share/fonts/*.ttf
         fc-cache -f -v
 
+    - name: Install chrome
+      uses: browser-actions/setup-chrome@latest
+
     - name: Build with Gradle
       run: |
         ./gradlew build --scan
