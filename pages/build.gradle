@@ -34,12 +34,13 @@ Hit kbd:[?] to see all shortcuts.
 
 """
     titles.each { year, map ->
-      writer.println("## $year")
+      writer.printf("## %s%n", year)
       writer.println("")
       writer.println('[cols="2a,3a,7a"]')
       writer.println("|===")
       map.each { k, v ->
-        writer.println("| ${v.date} | ${v.venue} | ${v.title} - link:${k}/html/index.html[HTML] - link:${k}/pdf/index.pdf[PDF] - ${v.video}[Video]")
+        writer.printf("| %s | %s | %s - link:%s/html/index.html[HTML] - link:%s/pdf/index.html[PDF] - %s[Video]%n",
+                v.date, v.venue, v.title, k, k, v.video)
       }
       writer.println("|===")
     }
