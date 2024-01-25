@@ -83,7 +83,7 @@ jobs:
         body-includes: Gradle Build Scan
 
     - name: Create or update comment
-      uses: peter-evans/create-or-update-comment@v2
+      uses: peter-evans/create-or-update-comment@v4
       if: always()
       with:
         comment-id: ${{ steps.fc.outputs.comment-id }}
