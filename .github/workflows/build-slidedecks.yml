@@ -1,7 +1,9 @@
-name: Build PR
+name: Build Slidedecks
 
 on:
   pull_request:
+    branches: [ master ]
+  push:
     branches: [ master ]
 
 jobs:
@@ -56,16 +58,26 @@ jobs:
         chmod 755 ~/.local/share/fonts
         chmod 644 ~/.local/share/fonts/*.ttf
         fc-cache -f -v
+        sudo apt-get update
+        sudo apt-get -yq install libatk1.0-0 libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 libasound2 xauth xvfb
+        sudo apt-get -yq install xfonts-utils
 
     - name: Install chrome
       uses: browser-actions/setup-chrome@latest
 
     - name: Build with Gradle
       run: |
-        ./gradlew build --scan
+        ./gradlew build --scan --stacktrace --info
+
+    - name: Deploy Github Pages
+      uses: JamesIves/github-pages-deploy-action@v4.6.0
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      with:
+        branch: gh-pages
+        folder: pages/build/staging
 
     - id: get-comment-body
-      if: always()
+      if: github.event_name == 'pull_request'
       run: |
         body=$(cat build/gradle-scan.md)
         body="${body//'%'/'%25'}"
@@ -75,7 +87,7 @@ jobs:
 
     - name: Find Comment
       uses: peter-evans/find-comment@v3
-      if: always()
+      if: github.event_name == 'pull_request'
       id: fc
       with:
         issue-number: ${{ github.event.pull_request.number }}
@@ -84,7 +96,7 @@ jobs:
 
     - name: Create or update comment
       uses: peter-evans/create-or-update-comment@v4
-      if: always()
+      if: github.event_name == 'pull_request'
       with:
         comment-id: ${{ steps.fc.outputs.comment-id }}
         issue-number: ${{ github.event.pull_request.number }}
