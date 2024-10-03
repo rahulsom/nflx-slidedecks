@@ -1,5 +1,7 @@
 import com.netflix.slidedecks.SlidedeckPlugin
 
+import java.time.LocalDate
+
 apply plugin: SlidedeckPlugin
 
 slidedeck {
