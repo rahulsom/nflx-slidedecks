@@ -80,30 +80,3 @@ jobs:
       with:
         branch: gh-pages
         folder: pages/build/staging
-
-    - id: get-comment-body
-      if: github.event_name == 'pull_request'
-      run: |
-        body=$(cat build/gradle-scan.md)
-        body="${body//'%'/'%25'}"
-        body="${body//$'\n'/'%0A'}"
-        body="${body//$'\r'/'%0D'}"
-        echo ::set-output name=body::$body
-
-    - name: Find Comment
-      uses: peter-evans/find-comment@v3
-      if: github.event_name == 'pull_request'
-      id: fc
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        comment-author: 'github-actions[bot]'
-        body-includes: Gradle Build Scan
-
-    - name: Create or update comment
-      uses: peter-evans/create-or-update-comment@v4
-      if: github.event_name == 'pull_request'
-      with:
-        comment-id: ${{ steps.fc.outputs.comment-id }}
-        issue-number: ${{ github.event.pull_request.number }}
-        body: ${{ steps.get-comment-body.outputs.body }}
-        edit-mode: replace
