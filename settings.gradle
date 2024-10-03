@@ -1,7 +1,5 @@
-import com.gradle.scan.plugin.PublishedBuildScan
-
 plugins {
-  id "com.gradle.enterprise" version "3.18.1"
+  id "com.gradle.develocity" version "3.18.1"
 }
 
 rootProject.name = 'nflx-slidedecks'
@@ -13,14 +11,8 @@ include 'build-meetup-2021-how-netflix-builds-code'
 
 include 'pages'
 
-gradleEnterprise {
+develocity {
   buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
-    publishAlways()
-    buildScanPublished { PublishedBuildScan scan ->
-      file("build").mkdirs()
-      file("build/gradle-scan.md").text = """Gradle Build Scan - [`${scan.buildScanId}`](${scan.buildScanUri})"""
-    }
+    termsOfUseUrl = "https://gradle.com/terms-of-service"
   }
 }
