@@ -75,7 +75,7 @@ jobs:
         ./gradlew build --scan --stacktrace --info
 
     - name: Deploy Github Pages
-      uses: JamesIves/github-pages-deploy-action@v4.7.0
+      uses: JamesIves/github-pages-deploy-action@v4.7.1
       if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
       with:
         branch: gh-pages
