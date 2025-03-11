@@ -41,7 +41,7 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v4
       with:
-        node-version: '18.4.0'
+        node-version: '18.20.7'
 
     - name: Install vega
       run: |
