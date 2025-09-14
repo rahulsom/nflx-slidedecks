@@ -7,27 +7,18 @@ const { execSync } = require('child_process');
 
 const ROOT_DIR = path.join(__dirname, '..');
 
-async function downloadRevealJs() {
-  const revealDir = path.join(ROOT_DIR, 'stylesheet', 'build', 'github-cache', 'hakimel', 'reveal.js', '3.9.1');
-  const revealJsDir = path.join(revealDir, 'reveal.js-3.9.1');
+function getRevealJsThemePath() {
+  // Use the reveal.js npm package installed in node_modules
+  const revealJsPath = path.join(ROOT_DIR, 'node_modules', 'reveal.js');
+  const themePath = path.join(revealJsPath, 'css', 'theme');
   
-  if (!fs.existsSync(revealJsDir)) {
-    console.log('Downloading reveal.js 3.9.1...');
-    await fs.ensureDir(revealDir);
-    
-    const tempTarFile = path.join(revealDir, 'reveal.js-3.9.1.tar.gz');
-    
-    try {
-      execSync(`curl -L -o "${tempTarFile}" "https://github.com/hakimel/reveal.js/archive/refs/tags/3.9.1.tar.gz"`, { stdio: 'inherit' });
-      execSync(`tar -xzf "${tempTarFile}" -C "${revealDir}"`, { stdio: 'inherit' });
-      fs.unlinkSync(tempTarFile);
-    } catch (error) {
-      console.error('Failed to download reveal.js:', error.message);
-      process.exit(1);
-    }
+  if (!fs.existsSync(themePath)) {
+    console.error('reveal.js theme directory not found. Make sure reveal.js is installed via npm.');
+    process.exit(1);
   }
   
-  return path.join(revealJsDir, 'css', 'theme');
+  console.log('Using reveal.js from npm package...');
+  return themePath;
 }
 
 async function buildStyles() {
@@ -44,8 +35,8 @@ async function buildStyles() {
   await fs.ensureDir(sassDir);
   await fs.ensureDir(docsDir);
   
-  // Download reveal.js templates
-  const revealThemeDir = await downloadRevealJs();
+  // Get reveal.js theme path from npm package
+  const revealThemeDir = getRevealJsThemePath();
   
   // Copy reveal.js theme files
   console.log('Copying reveal.js theme files...');
