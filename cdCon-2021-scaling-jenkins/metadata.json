@@ -1,1 +1,6 @@
-{"date":"2021-06-24","title":"How Netflix Autoscales CI","venue":"cdCon","video":"https://www.youtube.com/watch?v=LU8wYBWev_0"}
+{
+  "date": "2021-06-24",
+  "title": "How Netflix Autoscales CI",
+  "venue": "cdCon",
+  "video": "https://www.youtube.com/watch?v=LU8wYBWev_0"
+}
