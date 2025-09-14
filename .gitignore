@@ -17,3 +17,6 @@ gradle-app.setting
 # VSCode
 /.project
 /.settings
+
+# Node Project
+node_modules/

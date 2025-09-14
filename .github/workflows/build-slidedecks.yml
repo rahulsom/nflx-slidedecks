@@ -8,47 +8,31 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Cache Gradle Caches
-      id: cache-gradle-caches
+    - name: Cache npm dependencies
       uses: actions/cache@v4
       with:
-        key: ${{ runner.os }}-${{hashFiles('**/*.gradle')}}
-        path: |
-          ~/.gradle/caches
-
-    - name: Cache Gradle Wrapper
-      id: cache-gradle-wrapper
-      uses: actions/cache@v4
-      with:
-        key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-        path: |
-          ~/.gradle/wrapper
-
-    - uses: gradle/wrapper-validation-action@v3
-      name: Validate Gradle Wrapper
-
-    - name: Set up JDK 11
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'zulu'
-        java-version: '11'
-
+        key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+        path: ~/.npm
+        
     - name: Install node
       uses: actions/setup-node@v4
       with:
-        node-version: '22.14.0'
+        node-version: '24.7.0'
+        cache: 'npm'
 
-    - name: Install vega
+    - name: Install system dependencies
       run: |
-        npm install -g vega
-        npm install -g vega-lite
-        npm install -g vega-cli
-        npm install -g vega-embed
+        sudo apt-get update
+        sudo apt-get install -y libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev libpixman-1-dev
+        sudo apt-get install -y libatk1.0-0 libgtk-3-0 libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb xfonts-utils libasound2t64
+
+    - name: Install npm dependencies
+      run: npm ci
 
     - name: Install font
       run: |
@@ -60,19 +44,12 @@ jobs:
         chmod 755 ~/.local/share/fonts
         chmod 644 ~/.local/share/fonts/*.ttf
         fc-cache -f -v
-        sudo apt-get update
-        sudo apt-get -yq install libatk1.0-0 libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 libasound2 xauth xvfb
-        sudo apt-get -yq install xfonts-utils
 
     - name: Install chrome
       uses: browser-actions/setup-chrome@latest
 
-    - uses: gradle/actions/setup-gradle@v4
-      name: Setup Gradle
-
-    - name: Build with Gradle
-      run: |
-        ./gradlew build --scan --stacktrace --info
+    - name: Build slidedecks and stage pages
+      run: npm run build
 
     - name: Deploy Github Pages
       uses: JamesIves/github-pages-deploy-action@v4.7.3
