@@ -1,13 +1,23 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
-const fs = require('fs-extra');
-const path = require('path');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import { PRESENTATIONS } from './build-presentation';
+
+// Import asciidoctor with proper typing
 const asciidoctor = require('@asciidoctor/core')();
-const { PRESENTATIONS } = require('./build-presentation');
 
 const ROOT_DIR = path.join(__dirname, '..');
 
-async function copyPresentationToPages(presentationName) {
+interface PresentationMetadata {
+  name: string;
+  date: string;
+  title: string;
+  venue: string;
+  video: string;
+}
+
+async function copyPresentationToPages(presentationName: string): Promise<void> {
   console.log(`Copying ${presentationName} to pages...`);
   
   const presentationConfig = PRESENTATIONS[presentationName];
@@ -57,7 +67,7 @@ async function copyPresentationToPages(presentationName) {
   console.log(`  ✓ Created metadata at ${metadataPath}`);
 }
 
-async function buildIndex() {
+export async function buildIndex(): Promise<void> {
   console.log('Building pages index...');
   
   const stagingDir = path.join(ROOT_DIR, 'pages', 'build', 'staging');
@@ -66,7 +76,7 @@ async function buildIndex() {
   await fs.ensureDir(docsDir);
   
   // Collect all presentation metadata
-  const presentations = [];
+  const presentations: PresentationMetadata[] = [];
   
   if (fs.existsSync(stagingDir)) {
     const presentationDirs = await fs.readdir(stagingDir, { withFileTypes: true });
@@ -86,10 +96,10 @@ async function buildIndex() {
   }
   
   // Sort presentations by date (newest first)
-  presentations.sort((a, b) => new Date(b.date) - new Date(a.date));
+  presentations.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
   // Group by year
-  const presentationsByYear = {};
+  const presentationsByYear: Record<number, PresentationMetadata[]> = {};
   presentations.forEach(p => {
     const year = new Date(p.date).getFullYear();
     if (!presentationsByYear[year]) {
@@ -109,7 +119,9 @@ Hit kbd:[?] to see all shortcuts.
 `;
   
   // Sort years in descending order
-  const years = Object.keys(presentationsByYear).sort((a, b) => b - a);
+  const years = Object.keys(presentationsByYear)
+    .map(year => parseInt(year))
+    .sort((a, b) => b - a);
   
   for (const year of years) {
     indexContent += `## ${year}\n\n`;
@@ -153,7 +165,7 @@ Hit kbd:[?] to see all shortcuts.
   }
 }
 
-async function buildPages() {
+export async function buildPages(): Promise<void> {
   console.log('Building pages...');
   
   // Copy all presentations to pages
@@ -168,12 +180,12 @@ async function buildPages() {
   console.log(`Open ${ROOT_DIR}/pages/build/staging/index.html in your browser`);
 }
 
-async function main() {
+export { copyPresentationToPages };
+
+async function main(): Promise<void> {
   await buildPages();
 }
 
 if (require.main === module) {
   main().catch(console.error);
 }
-
-module.exports = { buildPages, buildIndex, copyPresentationToPages };

@@ -1,19 +1,24 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
-const fs = require('fs-extra');
-const path = require('path');
-const puppeteer = require('puppeteer');
-const http = require('http');
-const { createServer } = require('http');
-const { readFileSync, existsSync } = require('fs');
-const { extname } = require('path');
-const { PRESENTATIONS } = require('./build-presentation');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import puppeteer, { Browser } from 'puppeteer';
+import { createServer, Server } from 'http';
+import { readFileSync, existsSync } from 'fs';
+import { extname } from 'path';
+import { PRESENTATIONS } from './build-presentation';
 
 const ROOT_DIR = path.join(__dirname, '..');
 
+interface FileServer {
+  server: Server;
+  port: number;
+  url: string;
+}
+
 // Simple HTTP server for serving files during PDF export
-function createFileServer(rootPath, port = 0) {
-  const mimeTypes = {
+function createFileServer(rootPath: string, port: number = 0): Promise<FileServer> {
+  const mimeTypes: Record<string, string> = {
     '.html': 'text/html',
     '.js': 'text/javascript',
     '.css': 'text/css',
@@ -30,7 +35,7 @@ function createFileServer(rootPath, port = 0) {
 
   const server = createServer((req, res) => {
     // Parse URL and remove query parameters for file lookup
-    const urlPath = req.url.split('?')[0];
+    const urlPath = req.url?.split('?')[0] || '/';
     let filePath = path.join(rootPath, urlPath === '/' ? 'index.html' : urlPath);
     
     if (!existsSync(filePath)) {
@@ -57,13 +62,14 @@ function createFileServer(rootPath, port = 0) {
 
   return new Promise((resolve) => {
     server.listen(port, () => {
-      const actualPort = server.address().port;
+      const address = server.address();
+      const actualPort = typeof address === 'object' && address ? address.port : port;
       resolve({ server, port: actualPort, url: `http://localhost:${actualPort}` });
     });
   });
 }
 
-async function exportPDF(presentationName) {
+async function exportPDF(presentationName: string): Promise<void> {
   console.log(`Exporting PDF for presentation: ${presentationName}`);
   
   if (!PRESENTATIONS[presentationName]) {
@@ -95,10 +101,10 @@ async function exportPDF(presentationName) {
   
   console.log('Starting Puppeteer...');
   
-  let browser;
+  let browser: Browser | undefined;
   try {
     // Try different launch configurations based on environment
-    let launchOptions = {
+    let launchOptions: puppeteer.LaunchOptions = {
       headless: true, // Try old headless mode
       args: [
         '--no-sandbox',
@@ -182,11 +188,11 @@ async function exportPDF(presentationName) {
   }
 }
 
-async function main() {
+async function main(): Promise<void> {
   const presentationName = process.argv[2];
   
   if (!presentationName) {
-    console.error('Usage: node export-pdf.js <presentation-name>');
+    console.error('Usage: tsx scripts/export-pdf.ts <presentation-name>');
     console.error('Available presentations:');
     Object.keys(PRESENTATIONS).forEach(name => console.error(`  - ${name}`));
     process.exit(1);
@@ -199,4 +205,4 @@ if (require.main === module) {
   main().catch(console.error);
 }
 
-module.exports = { exportPDF };
+export { exportPDF };

@@ -1,13 +1,13 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
-const fs = require('fs-extra');
-const path = require('path');
-const sass = require('sass');
-const { execSync } = require('child_process');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import * as sass from 'sass';
+import { execSync } from 'child_process';
 
 const ROOT_DIR = path.join(__dirname, '..');
 
-function getRevealJsThemePath() {
+function getRevealJsThemePath(): string {
   // Use the reveal.js npm package installed in node_modules
   const revealJsPath = path.join(ROOT_DIR, 'node_modules', 'reveal.js');
   const themePath = path.join(revealJsPath, 'css', 'theme');
@@ -21,7 +21,7 @@ function getRevealJsThemePath() {
   return themePath;
 }
 
-async function buildStyles() {
+export async function buildStyles(): Promise<void> {
   console.log('Building styles...');
   
   const stylesheetBuildDir = path.join(ROOT_DIR, 'stylesheet', 'build');
@@ -76,7 +76,8 @@ async function buildStyles() {
       // Clean up temp directory
       await fs.remove(tempDir);
     } catch (error) {
-      console.error('Failed to extract font:', error.message);
+      const err = error as Error;
+      console.error('Failed to extract font:', err.message);
     }
   }
   
@@ -97,7 +98,8 @@ async function buildStyles() {
         await fs.writeFile(outputPath, result.css);
         console.log(`Compiled ${file} -> ${path.basename(outputPath)}`);
       } catch (error) {
-        console.error(`Failed to compile ${file}:`, error.message);
+        const err = error as Error;
+        console.error(`Failed to compile ${file}:`, err.message);
       }
     }
   }
@@ -105,8 +107,10 @@ async function buildStyles() {
   console.log('SASS compilation completed!');
 }
 
-if (require.main === module) {
-  buildStyles().catch(console.error);
+async function main(): Promise<void> {
+  await buildStyles();
 }
 
-module.exports = { buildStyles };
+if (require.main === module) {
+  main().catch(console.error);
+}
