@@ -10,17 +10,17 @@
   "scripts": {
     "build": "npm run build:stylesheet && npm run build:presentations && npm run build:pdfs && npm run build:pages",
     "build:stylesheet": "npm run build:sass",
-    "build:sass": "node scripts/build-sass.js",
+    "build:sass": "npx tsx scripts/build-sass.ts",
     "build:presentations": "npm run build:meetup-2021 && npm run build:cdcon-2021",
     "build:meetup-2021": "npm run build:presentation -- build-meetup-2021-how-netflix-builds-code",
     "build:cdcon-2021": "npm run build:presentation -- cdCon-2021-scaling-jenkins",
-    "build:presentation": "node scripts/build-presentation.js",
+    "build:presentation": "npx tsx scripts/build-presentation.ts",
     "build:pdfs": "npm run export:pdf",
-    "build:pages": "node scripts/build-pages.js",
+    "build:pages": "npx tsx scripts/build-pages.ts",
     "export:pdf": "npm run export:pdf:meetup-2021 && npm run export:pdf:cdcon-2021",
     "export:pdf:meetup-2021": "npm run export:pdf:presentation -- build-meetup-2021-how-netflix-builds-code",
     "export:pdf:cdcon-2021": "npm run export:pdf:presentation -- cdCon-2021-scaling-jenkins",
-    "export:pdf:presentation": "node scripts/export-pdf.js",
+    "export:pdf:presentation": "npx tsx scripts/export-pdf.ts",
     "clean": "rimraf */build",
     "serve": "http-server pages/build/staging -p 8080 -o",
     "dev": "npm run build && npm run serve"
@@ -28,6 +28,8 @@
   "devDependencies": {
     "@asciidoctor/core": "^3.0.4",
     "@asciidoctor/reveal.js": "^5.0.1",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.3.3",
     "asciidoctor-kroki": "^0.18.1",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
@@ -35,7 +37,9 @@
     "puppeteer": "^24.20.0",
     "reveal.js": "^3.9.2",
     "rimraf": "^5.0.5",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "vega": "^5.28.0",

@@ -1,11 +1,13 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
-const fs = require('fs-extra');
-const path = require('path');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import { execSync } from 'child_process';
+
+// Import asciidoctor with proper typing
 const asciidoctor = require('@asciidoctor/core')();
 const asciidoctorRevealjs = require('@asciidoctor/reveal.js');
 const asciidoctorKroki = require('asciidoctor-kroki');
-const { execSync } = require('child_process');
 
 // Register extensions
 asciidoctorRevealjs.register();
@@ -13,8 +15,16 @@ asciidoctorKroki.register(asciidoctor.Extensions);
 
 const ROOT_DIR = path.join(__dirname, '..');
 
+export interface PresentationConfig {
+  date: string;
+  title: string;
+  venue: string;
+  video: string;
+  theme: string;
+}
+
 // Presentation configurations
-const PRESENTATIONS = {
+export const PRESENTATIONS: Record<string, PresentationConfig> = {
   'build-meetup-2021-how-netflix-builds-code': {
     date: '2021-06-25',
     title: 'How Netflix Builds Code',
@@ -31,7 +41,7 @@ const PRESENTATIONS = {
   }
 };
 
-async function downloadRevealJs(version = '3.9.1') {
+async function downloadRevealJs(version: string = '3.9.1'): Promise<string> {
   const revealDir = path.join(ROOT_DIR, 'build', 'github-cache', 'hakimel', 'reveal.js', version);
   const revealJsDir = path.join(revealDir, `reveal.js-${version}`);
   
@@ -46,7 +56,8 @@ async function downloadRevealJs(version = '3.9.1') {
       execSync(`tar -xzf "${tempTarFile}" -C "${revealDir}"`, { stdio: 'inherit' });
       fs.unlinkSync(tempTarFile);
     } catch (error) {
-      console.error('Failed to download reveal.js:', error.message);
+      const err = error as Error;
+      console.error('Failed to download reveal.js:', err.message);
       process.exit(1);
     }
   }
@@ -54,7 +65,7 @@ async function downloadRevealJs(version = '3.9.1') {
   return revealJsDir;
 }
 
-async function copyStyles(presentationName, buildDir) {
+async function copyStyles(presentationName: string, buildDir: string): Promise<void> {
   console.log('Copying styles...');
   
   const stylesheetBuildDir = path.join(ROOT_DIR, 'stylesheet', 'build');
@@ -79,7 +90,7 @@ async function copyStyles(presentationName, buildDir) {
   }
 }
 
-async function buildPresentation(presentationName) {
+export async function buildPresentation(presentationName: string): Promise<void> {
   console.log(`Building presentation: ${presentationName}`);
   
   if (!PRESENTATIONS[presentationName]) {
@@ -162,7 +173,7 @@ async function buildPresentation(presentationName) {
   }
   
   // Build RevealJS options
-  const revealOptions = {
+  const revealOptions: Record<string, boolean | string> = {
     controls: false,
     overview: true,
     progress: true,
@@ -174,7 +185,7 @@ async function buildPresentation(presentationName) {
   // Convert AsciiDoc to RevealJS
   console.log('Converting AsciiDoc to RevealJS...');
   
-  const attributes = {
+  const attributes: Record<string, string | boolean> = {
     'includedir': sourceDir,
     'revealjsdir': 'reveal.js',
     'revealjs-theme': config.theme,
@@ -240,11 +251,11 @@ async function buildPresentation(presentationName) {
   }
 }
 
-async function main() {
+async function main(): Promise<void> {
   const presentationName = process.argv[2];
   
   if (!presentationName) {
-    console.error('Usage: node build-presentation.js <presentation-name>');
+    console.error('Usage: tsx scripts/build-presentation.ts <presentation-name>');
     console.error('Available presentations:');
     Object.keys(PRESENTATIONS).forEach(name => console.error(`  - ${name}`));
     process.exit(1);
@@ -256,5 +267,3 @@ async function main() {
 if (require.main === module) {
   main().catch(console.error);
 }
-
-module.exports = { buildPresentation, PRESENTATIONS };
