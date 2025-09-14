@@ -1,0 +1,45 @@
+{
+  "name": "nflx-slidedecks",
+  "version": "1.0.0",
+  "description": "Netflix slidedecks using AsciiDoc and RevealJS",
+  "author": "Rahul Somasunderam",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "npm run build:stylesheet && npm run build:presentations && npm run build:pdfs && npm run build:pages",
+    "build:stylesheet": "npm run build:sass",
+    "build:sass": "node scripts/build-sass.js",
+    "build:presentations": "npm run build:meetup-2021 && npm run build:cdcon-2021",
+    "build:meetup-2021": "npm run build:presentation -- build-meetup-2021-how-netflix-builds-code",
+    "build:cdcon-2021": "npm run build:presentation -- cdCon-2021-scaling-jenkins",
+    "build:presentation": "node scripts/build-presentation.js",
+    "build:pdfs": "npm run export:pdf",
+    "build:pages": "node scripts/build-pages.js",
+    "export:pdf": "npm run export:pdf:meetup-2021 && npm run export:pdf:cdcon-2021",
+    "export:pdf:meetup-2021": "npm run export:pdf:presentation -- build-meetup-2021-how-netflix-builds-code",
+    "export:pdf:cdcon-2021": "npm run export:pdf:presentation -- cdCon-2021-scaling-jenkins",
+    "export:pdf:presentation": "node scripts/export-pdf.js",
+    "clean": "rimraf */build",
+    "serve": "http-server pages/build/staging -p 8080 -o",
+    "dev": "npm run build && npm run serve"
+  },
+  "devDependencies": {
+    "@asciidoctor/core": "^3.0.4",
+    "@asciidoctor/reveal.js": "^5.0.1",
+    "asciidoctor-kroki": "^0.18.1",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "http-server": "^14.1.1",
+    "puppeteer": "^24.20.0",
+    "rimraf": "^5.0.5",
+    "sass": "^1.69.7"
+  },
+  "dependencies": {
+    "vega": "^5.28.0",
+    "vega-cli": "^5.28.0",
+    "vega-embed": "^6.24.0",
+    "vega-lite": "^5.16.3"
+  }
+}
