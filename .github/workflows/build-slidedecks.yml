@@ -17,6 +17,15 @@ jobs:
     steps:
     - uses: actions/checkout@v5
 
+    - name: Cache system dependencies
+      id: cache-system-deps
+      uses: actions/cache@v4
+      with:
+        path: /var/cache/apt/archives
+        key: system-deps-${{ runner.os }}-${{ hashFiles('**/workflows/build-slidedecks.yml') }}
+        restore-keys: |
+          system-deps-${{ runner.os }}-
+
     - name: Install node
       uses: actions/setup-node@v5
       with:
