@@ -7,7 +7,8 @@
 +
 [source,shell]
 ----
-./gradlew build
+npm install
+npm run build
 ----
 
 2. Then open the generated `pages/build/staging/index.html` in your browser.
