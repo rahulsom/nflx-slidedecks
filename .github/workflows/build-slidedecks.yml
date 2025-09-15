@@ -2,9 +2,9 @@ name: Build Slidedecks
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ "*" ]
   push:
-    branches: [ master ]
+    branches: [ "*" ]
 
 jobs:
   build:
