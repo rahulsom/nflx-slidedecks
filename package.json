@@ -42,9 +42,9 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "vega": "^5.28.0",
+    "vega": "^6.0.0",
     "vega-cli": "^6.0.0",
     "vega-embed": "^7.0.0",
-    "vega-lite": "^5.16.3"
+    "vega-lite": "^6.0.0"
   }
 }
