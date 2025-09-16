@@ -27,9 +27,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y \
-            libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev libpixman-1-dev \
-            libatk1.0-0 libgtk-3-0 libnotify-dev libnss3 libxss1 libxtst6 xauth xvfb \
-            xfonts-utils libasound2t64
+            xfonts-utils
 
     - name: Install npm dependencies
       run: npm ci
