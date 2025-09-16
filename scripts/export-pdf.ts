@@ -2,7 +2,7 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import puppeteer, { Browser } from 'puppeteer';
+import puppeteer, { Browser, LaunchOptions } from 'puppeteer';
 import { createServer, Server } from 'http';
 import { readFileSync, existsSync } from 'fs';
 import { extname } from 'path';
@@ -104,7 +104,7 @@ async function exportPDF(presentationName: string): Promise<void> {
   let browser: Browser | undefined;
   try {
     // Try different launch configurations based on environment
-    let launchOptions: puppeteer.LaunchOptions = {
+    let launchOptions: LaunchOptions = {
       headless: true, // Try old headless mode
       args: [
         '--no-sandbox',
