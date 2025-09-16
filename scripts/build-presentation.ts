@@ -2,7 +2,6 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { execSync } from 'child_process';
 
 // Import asciidoctor with proper typing
 const asciidoctor = require('@asciidoctor/core')();
@@ -41,25 +40,12 @@ export const PRESENTATIONS: Record<string, PresentationConfig> = {
   }
 };
 
-async function downloadRevealJs(version: string = '3.9.1'): Promise<string> {
-  const revealDir = path.join(ROOT_DIR, 'build', 'github-cache', 'hakimel', 'reveal.js', version);
-  const revealJsDir = path.join(revealDir, `reveal.js-${version}`);
+function getRevealJsDir(): string {
+  const revealJsDir = path.join(ROOT_DIR, 'node_modules', 'reveal.js');
   
   if (!fs.existsSync(revealJsDir)) {
-    console.log(`Downloading reveal.js ${version}...`);
-    await fs.ensureDir(revealDir);
-    
-    const tempTarFile = path.join(revealDir, `reveal.js-${version}.tar.gz`);
-    
-    try {
-      execSync(`curl -L -o "${tempTarFile}" "https://github.com/hakimel/reveal.js/archive/refs/tags/${version}.tar.gz"`, { stdio: 'inherit' });
-      execSync(`tar -xzf "${tempTarFile}" -C "${revealDir}"`, { stdio: 'inherit' });
-      fs.unlinkSync(tempTarFile);
-    } catch (error) {
-      const err = error as Error;
-      console.error('Failed to download reveal.js:', err.message);
-      process.exit(1);
-    }
+    console.error('reveal.js not found in node_modules. Please run: npm install');
+    process.exit(1);
   }
   
   return revealJsDir;
@@ -112,8 +98,8 @@ export async function buildPresentation(presentationName: string): Promise<void>
   // Ensure build directory exists
   await fs.ensureDir(buildDir);
   
-  // Download reveal.js template
-  const revealJsDir = await downloadRevealJs('3.9.1');
+  // Get reveal.js from node_modules
+  const revealJsDir = getRevealJsDir();
   
   // Copy reveal.js files to build directory
   console.log('Copying reveal.js template...');
@@ -122,18 +108,25 @@ export async function buildPresentation(presentationName: string): Promise<void>
   
   // Fix reveal.js asset paths for compatibility
   console.log('Setting up reveal.js asset compatibility...');
-  const revealDistDir = path.join(buildDir, 'reveal.js', 'dist');
-  await fs.ensureDir(revealDistDir);
   
-  // Copy CSS files to dist directory (expected by generated HTML)
-  await fs.copy(path.join(buildDir, 'reveal.js', 'css', 'reset.css'), path.join(revealDistDir, 'reset.css'));
-  await fs.copy(path.join(buildDir, 'reveal.js', 'css', 'reveal.css'), path.join(revealDistDir, 'reveal.css'));
-  await fs.copy(path.join(buildDir, 'reveal.js', 'js', 'reveal.js'), path.join(revealDistDir, 'reveal.js'));
+  // The npm package already has files in dist directory, so we need to create compatibility symlinks/copies
+  // Create css directory with copies for legacy path support
+  const revealCssDir = path.join(buildDir, 'reveal.js', 'css');
+  await fs.ensureDir(revealCssDir);
+  await fs.copy(path.join(buildDir, 'reveal.js', 'dist', 'reset.css'), path.join(revealCssDir, 'reset.css'));
+  await fs.copy(path.join(buildDir, 'reveal.js', 'dist', 'reveal.css'), path.join(revealCssDir, 'reveal.css'));
   
-  // Copy highlight plugin assets
+  // Create js directory with copy for legacy path support
+  const revealJsBuildDir = path.join(buildDir, 'reveal.js', 'js');
+  await fs.ensureDir(revealJsBuildDir);
+  await fs.copy(path.join(buildDir, 'reveal.js', 'dist', 'reveal.js'), path.join(revealJsBuildDir, 'reveal.js'));
+
+  // The npm package already includes the highlight plugin in the correct location
+  // Just ensure the highlight plugin directory exists (it should already from the copy above)
   const highlightPluginDir = path.join(buildDir, 'reveal.js', 'plugin', 'highlight');
-  await fs.ensureDir(highlightPluginDir);
-  await fs.copy(path.join(buildDir, 'reveal.js', 'lib', 'css', 'monokai.css'), path.join(highlightPluginDir, 'monokai.css'));
+  if (!fs.existsSync(path.join(highlightPluginDir, 'monokai.css'))) {
+    console.warn('Warning: monokai.css not found at expected location');
+  }
   
   // Copy images from source to build directory
   console.log('Copying images...');
