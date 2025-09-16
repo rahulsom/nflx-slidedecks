@@ -49,7 +49,7 @@ jobs:
       uses: browser-actions/setup-chrome@latest
 
     - name: Build slidedecks and stage pages
-      run: npm run build
+      run: npm run :build
 
     - name: Deploy Github Pages
       uses: JamesIves/github-pages-deploy-action@v4.7.3
