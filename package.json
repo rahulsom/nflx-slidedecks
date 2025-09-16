@@ -9,6 +9,7 @@
   },
   "scripts": {
     ":clean": "rimraf */build",
+    ":typecheck": "tsc --noEmit",
     ":stylesheet:sass": "tsx scripts/build-sass.ts",
     ":stylesheet:build": "npm run :stylesheet:sass",
     ":task:presentation": "tsx scripts/build-presentation.ts",

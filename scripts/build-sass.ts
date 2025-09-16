@@ -92,7 +92,7 @@ export async function buildStyles(): Promise<void> {
       
       try {
         const result = sass.compile(inputPath, {
-          includePaths: [scssDir, scssSourceDir]
+          loadPaths: [scssDir, scssSourceDir]
         });
         
         await fs.writeFile(outputPath, result.css);
