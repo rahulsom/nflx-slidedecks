@@ -48,5 +48,6 @@
     "vega-cli": "^6.0.0",
     "vega-embed": "^7.0.0",
     "vega-lite": "^6.0.0"
-  }
+  },
+  "packageManager": "npm@24.8.0"
 }
