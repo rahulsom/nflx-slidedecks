@@ -15,6 +15,9 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    env:
+      PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.puppeteer_cache
+      PUPPETEER_BROWSER_REVISION: '1135561'
 
     steps:
     - uses: actions/checkout@v5
@@ -24,6 +27,14 @@ jobs:
       with:
         node-version: '24.10.0'
         cache: 'npm'
+
+    - name: Cache puppeteer browser
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.PUPPETEER_CACHE_DIR }}
+        key: ${{ runner.os }}-puppeteer-${{ env.PUPPETEER_BROWSER_REVISION }}
+        restore-keys: |
+          ${{ runner.os }}-puppeteer-
 
     - name: Install system dependencies
       run: |
@@ -44,9 +55,6 @@ jobs:
         chmod 755 ~/.local/share/fonts
         chmod 644 ~/.local/share/fonts/*.ttf
         fc-cache -f -v
-
-    - name: Install chrome
-      uses: browser-actions/setup-chrome@latest
 
     - name: Typecheck scripts
       run: npm run :typecheck
