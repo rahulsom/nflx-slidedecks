@@ -29,7 +29,7 @@ jobs:
         cache: 'npm'
 
     - name: Cache puppeteer browser
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.PUPPETEER_CACHE_DIR }}
         key: ${{ runner.os }}-puppeteer-${{ env.PUPPETEER_BROWSER_REVISION }}
