@@ -20,7 +20,7 @@ jobs:
       PUPPETEER_BROWSER_REVISION: '1135561'
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Install node
       uses: actions/setup-node@v6
