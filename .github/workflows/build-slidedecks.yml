@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.puppeteer_cache
-      PUPPETEER_BROWSER_REVISION: '1135561'
 
     steps:
     - uses: actions/checkout@v7
@@ -32,7 +31,7 @@ jobs:
       uses: actions/cache@v5
       with:
         path: ${{ env.PUPPETEER_CACHE_DIR }}
-        key: ${{ runner.os }}-puppeteer-${{ env.PUPPETEER_BROWSER_REVISION }}
+        key: ${{ runner.os }}-puppeteer-${{ hashFiles('package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-puppeteer-
 
@@ -44,6 +43,9 @@ jobs:
 
     - name: Install npm dependencies
       run: npm ci
+
+    - name: Download puppeteer browser
+      run: npx puppeteer browsers install chrome
 
     - name: Install font
       run: |
