@@ -4,10 +4,8 @@
     "config:recommended"
   ],
   "automerge": false,
-  "npm": {
-    "lockFileMaintenance": {
-      "enabled": true
-    }
+  "lockFileMaintenance": {
+    "enabled": true
   },
   "postUpdateOptions": [
     "npmInstallTwice"
