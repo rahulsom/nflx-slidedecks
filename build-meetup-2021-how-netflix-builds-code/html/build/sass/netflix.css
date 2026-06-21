@@ -1,5 +1,5 @@
 /* netflix-sans-100 - latin */
-@import url(./fonts/source-sans-pro/source-sans-pro.css);
+@import url("./fonts/source-sans-pro/source-sans-pro.css");
 @font-face {
   font-family: "Netflix Sans";
   font-style: normal;
@@ -47,26 +47,15 @@
   src: url("fonts/netflix-sans-800.eot"); /* IE9 Compat Modes */
   src: local("Netflix Sans Black"), local("NetflixSans-Black"), url("fonts/netflix-sans-800.eot?#iefix") format("embedded-opentype"), url("fonts/netflix-sans-800.woff2") format("woff2"), url("fonts/netflix-sans-800.woff") format("woff"), url("fonts/netflix-sans-800.ttf") format("truetype"); /* Safari, Android, iOS */
 }
-/**
- * White theme for reveal.js. This is the opposite of the 'black' theme.
- *
- * By Hakim El Hattab, http://hakim.se
- */
-section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
-  color: #fff;
-}
-
-/*********************************************
- * GLOBAL STYLES
- *********************************************/
 :root {
+  --r-background: #2b2b2b;
   --r-background-color: #fff;
-  --r-main-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-main-font: 'Source Sans Pro', Helvetica, sans-serif;
   --r-main-font-size: 42px;
   --r-main-color: #222;
   --r-block-margin: 20px;
   --r-heading-margin: 0 0 20px 0;
-  --r-heading-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-heading-font: 'Source Sans Pro', Helvetica, sans-serif;
   --r-heading-color: #222;
   --r-heading-line-height: 1.2;
   --r-heading-letter-spacing: normal;
@@ -82,14 +71,17 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-link-color: #2a76dd;
   --r-link-color-dark: rgb(30.7720647773, 99.5566801619, 192.7779352227);
   --r-link-color-hover: rgb(73.95, 138.55, 226.1);
-  --r-selection-background-color: rgb(95.25, 152.25, 229.5);
+  --r-selection-background-color: #2a76dd;
   --r-selection-color: #fff;
-  --r-overlay-element-bg-color: 0, 0, 0;
-  --r-overlay-element-fg-color: 240, 240, 240;
+  --r-overlay-element-bg-color: 0 0 0;
+  --r-overlay-element-fg-color: 240 240 240;
 }
 
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
 .reveal-viewport {
-  background: #fff;
+  background: var(--r-background);
   background-color: var(--r-background-color);
 }
 
@@ -405,6 +397,16 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
     background-color: var(--r-background-color);
   }
 }
+section.has-dark-background,
+section.has-dark-background h1,
+section.has-dark-background h2,
+section.has-dark-background h3,
+section.has-dark-background h4,
+section.has-dark-background h5,
+section.has-dark-background h6 {
+  color: #fff;
+}
+
 ul.none {
   list-style: none;
 }
