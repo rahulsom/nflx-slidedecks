@@ -1,14 +1,15 @@
 #!/usr/bin/env tsx
 
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as path from 'path';
 import puppeteer, { Browser, LaunchOptions } from 'puppeteer';
 import { createServer, Server } from 'http';
 import { readFileSync, existsSync } from 'fs';
 import { extname } from 'path';
-import { PRESENTATIONS } from './build-presentation';
+import { fileURLToPath } from 'url';
+import { PRESENTATIONS } from './build-presentation.js';
 
-const ROOT_DIR = path.join(__dirname, '..');
+const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 
 interface FileServer {
   server: Server;
@@ -320,7 +321,7 @@ async function main(): Promise<void> {
   await exportPDF(presentationName);
 }
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch(console.error);
 }
 
