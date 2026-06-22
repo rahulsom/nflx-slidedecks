@@ -29,7 +29,7 @@
     ":dev": "npm run :build && npm run :serve"
   },
   "devDependencies": {
-    "@asciidoctor/core": "^3.0.4",
+    "@asciidoctor/core": "^4.0.0",
     "@asciidoctor/reveal.js": "^5.0.1",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.3.3",
