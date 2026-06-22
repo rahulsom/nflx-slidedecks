@@ -1,6 +1,20 @@
 @import "../netflix-sans.scss";
 @import "white.scss";
 
+// Bridge the camelCase SCSS variables defined in white.scss to the hyphenated
+// CSS custom properties emitted by settings.scss, overriding the dark defaults.
+:root {
+  --r-background: #{$backgroundColor};
+  --r-background-color: #{$backgroundColor};
+  --r-main-color: #{$mainColor};
+  --r-heading-color: #{$headingColor};
+  --r-link-color: #{$linkColor};
+  --r-link-color-hover: #{$linkColorHover};
+  --r-selection-background-color: #{$selectionBackgroundColor};
+  --r-overlay-element-bg-color: #{$overlayElementBgColor};
+  --r-overlay-element-fg-color: #{$overlayElementFgColor};
+}
+
 ul.none {
   list-style: none;
 }
@@ -73,7 +87,12 @@ ul.none {
       margin: 0;
       padding: 5px;
       right: 0;
+      display: none;
     }
+  }
+
+  section.present .attribution p {
+    display: block;
   }
 
 }
