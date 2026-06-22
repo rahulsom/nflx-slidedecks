@@ -42,7 +42,7 @@ jobs:
             xfonts-utils
 
     - name: Install npm dependencies
-      run: npm ci
+      run: ./npmw ci
 
     - name: Download puppeteer browser
       run: npx puppeteer browsers install chrome
@@ -59,10 +59,10 @@ jobs:
         fc-cache -f -v
 
     - name: Typecheck scripts
-      run: npm run :typecheck
+      run: ./npmw run :typecheck
 
     - name: Build slidedecks and stage pages
-      run: npm run :build
+      run: ./npmw run :build
 
     - name: Deploy Github Pages
       uses: JamesIves/github-pages-deploy-action@v4.8.0
