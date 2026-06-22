@@ -1,18 +1,19 @@
 @import "../netflix-sans.scss";
 @import "white.scss";
 
-// Bridge the camelCase SCSS variables defined in white.scss to the hyphenated
-// CSS custom properties emitted by settings.scss, overriding the dark defaults.
+// white.scss uses @use 'template/settings' with (...) and no longer exports
+// SCSS variables. Override the CSS custom properties directly with the white
+// theme values so they win over the dark defaults in settings.scss.
 :root {
-  --r-background: #{$backgroundColor};
-  --r-background-color: #{$backgroundColor};
-  --r-main-color: #{$mainColor};
-  --r-heading-color: #{$headingColor};
-  --r-link-color: #{$linkColor};
-  --r-link-color-hover: #{$linkColorHover};
-  --r-selection-background-color: #{$selectionBackgroundColor};
-  --r-overlay-element-bg-color: #{$overlayElementBgColor};
-  --r-overlay-element-fg-color: #{$overlayElementFgColor};
+  --r-background: #fff;
+  --r-background-color: #fff;
+  --r-main-color: #222;
+  --r-heading-color: #222;
+  --r-link-color: #2a76dd;
+  --r-link-color-hover: #4a96fd;
+  --r-selection-background-color: #2a76dd;
+  --r-overlay-element-bg-color: 0 0 0;
+  --r-overlay-element-fg-color: 240 240 240;
 }
 
 ul.none {
