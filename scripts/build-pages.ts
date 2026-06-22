@@ -133,7 +133,7 @@ Hit kbd:[?] to see all shortcuts.
         `${presentation.video}[Video]` : 
         `link:${presentation.video}[Video]`;
         
-      indexContent += `| ${presentation.date} | ${presentation.venue} | ${presentation.title} - link:${presentation.name}/html/index.html[HTML] - link:${presentation.name}/pdf/index.pdf[PDF] - ${videoLink}\n`;
+      indexContent += `| ${presentation.date} | ${presentation.venue} | ${presentation.title} - link:${presentation.name}/html/index.html[HTML] - link:${presentation.name}/pdf/index-A4.pdf[PDF (A4)] - link:${presentation.name}/pdf/index-Letter.pdf[PDF (Letter)] - ${videoLink}\n`;
     }
     
     indexContent += '|===\n\n';

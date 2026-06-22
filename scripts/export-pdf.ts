@@ -73,7 +73,18 @@ function createFileServer(rootPath: string, port: number = 0): Promise<FileServe
   });
 }
 
-function buildPortraitPdfHtml(screenshots: string[], slides: SlideInfo[]): string {
+interface PageFormat {
+  name: string;
+  widthMm: number;
+  heightMm: number;
+}
+
+const PAGE_FORMATS: Record<string, PageFormat> = {
+  A4:     { name: 'A4',     widthMm: 210,   heightMm: 297 },
+  Letter: { name: 'Letter', widthMm: 215.9, heightMm: 279.4 },
+};
+
+function buildPortraitPdfHtml(screenshots: string[], slides: SlideInfo[], format: PageFormat): string {
   const pages = screenshots.map((screenshot, i) => {
     const notes = slides[i]?.notesHtml || '';
     return `
@@ -93,12 +104,12 @@ function buildPortraitPdfHtml(screenshots: string[], slides: SlideInfo[]): strin
 <head>
 <meta charset="UTF-8">
 <style>
-  @page { size: A4 portrait; margin: 0; }
+  @page { size: ${format.widthMm}mm ${format.heightMm}mm portrait; margin: 0; }
   * { box-sizing: border-box; }
   body { margin: 0; padding: 0; font-family: Helvetica, Arial, sans-serif; }
   .page {
-    width: 210mm;
-    height: 297mm;
+    width: ${format.widthMm}mm;
+    height: ${format.heightMm}mm;
     display: flex;
     flex-direction: column;
     page-break-after: always;
@@ -161,7 +172,6 @@ async function exportPDF(presentationName: string): Promise<void> {
   const buildDir = path.join(presentationDir, 'build', 'docs', 'asciidocRevealJs');
   const exportDir = path.join(presentationDir, 'build', 'docs', 'asciidocRevealJsExport');
   const htmlFile = path.join(buildDir, 'index.html');
-  const pdfFile = path.join(exportDir, 'index.pdf');
 
   if (!fs.existsSync(htmlFile)) {
     console.error(`HTML file not found: ${htmlFile}`);
@@ -265,28 +275,26 @@ async function exportPDF(presentationName: string): Promise<void> {
 
     await slidePage.close();
 
-    // --- Phase 2: Compose portrait PDF with slide image (top) + speaker notes (bottom) ---
-    console.log('Generating portrait PDF...');
-    const pdfHtml = buildPortraitPdfHtml(screenshots, slideInfos);
+    // --- Phase 2: Compose portrait PDFs (one per page format) from the same screenshots ---
+    for (const format of Object.values(PAGE_FORMATS)) {
+      const outFile = path.join(exportDir, `index-${format.name}.pdf`);
+      console.log(`Generating ${format.name} PDF...`);
+      const pdfHtml = buildPortraitPdfHtml(screenshots, slideInfos, format);
 
-    const pdfPage = await browser.newPage();
-    await pdfPage.setContent(pdfHtml, { waitUntil: 'load' });
+      const pdfPage = await browser.newPage();
+      await pdfPage.setContent(pdfHtml, { waitUntil: 'load' });
 
-    await pdfPage.pdf({
-      path: pdfFile,
-      format: 'A4',
-      landscape: false,
-      printBackground: true,
-      margin: {
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px'
-      },
-      preferCSSPageSize: true
-    });
+      await pdfPage.pdf({
+        path: outFile,
+        landscape: false,
+        printBackground: true,
+        margin: { top: '0px', right: '0px', bottom: '0px', left: '0px' },
+        preferCSSPageSize: true
+      });
 
-    console.log(`✓ PDF exported to: ${pdfFile}`);
+      await pdfPage.close();
+      console.log(`✓ PDF exported to: ${outFile}`);
+    }
 
   } catch (error) {
     console.error('Failed to export PDF:', error);
