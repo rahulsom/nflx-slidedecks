@@ -1,11 +1,12 @@
 #!/usr/bin/env tsx
 
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as path from 'path';
 import * as sass from 'sass';
 import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
-const ROOT_DIR = path.join(__dirname, '..');
+const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 
 function getRevealJsThemePath(): string {
   // Use the reveal.js npm package installed in node_modules
@@ -111,6 +112,6 @@ async function main(): Promise<void> {
   await buildStyles();
 }
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch(console.error);
 }

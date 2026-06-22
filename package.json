@@ -4,6 +4,7 @@
   "description": "Netflix slidedecks using AsciiDoc and RevealJS",
   "author": "Rahul Somasunderam",
   "license": "ISC",
+  "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -41,7 +42,7 @@
     "rimraf": "^6.0.0",
     "sass": "^1.69.7",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "typescript": "^6.0.0"
   },
   "dependencies": {
     "vega": "^6.0.0",

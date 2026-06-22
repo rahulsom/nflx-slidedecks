@@ -1,13 +1,16 @@
 #!/usr/bin/env tsx
 
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as path from 'path';
-import { PRESENTATIONS } from './build-presentation';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { PRESENTATIONS } from './build-presentation.js';
 
-// Import asciidoctor with proper typing
+const require = createRequire(import.meta.url);
+
 const asciidoctor = require('@asciidoctor/core')();
 
-const ROOT_DIR = path.join(__dirname, '..');
+const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 
 interface PresentationMetadata {
   name: string;
@@ -186,6 +189,6 @@ async function main(): Promise<void> {
   await buildPages();
 }
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch(console.error);
 }
