@@ -3,11 +3,21 @@
   "extends": [
     "config:recommended"
   ],
+  "rangeStrategy": "update-lockfile",
   "automerge": false,
   "lockFileMaintenance": {
     "enabled": true
   },
   "postUpdateOptions": [
     "npmInstallTwice"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "@asciidoctor/core",
+        "asciidoctor-kroki"
+      ],
+      "groupName": "asciidoctor packages"
+    }
   ]
 }
