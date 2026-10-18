@@ -8,7 +8,7 @@ import { PRESENTATIONS } from './build-presentation.js';
 
 const require = createRequire(import.meta.url);
 
-const asciidoctor = require('@asciidoctor/core')();
+const asciidoctor = require('@asciidoctor/core');
 
 const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 
@@ -149,7 +149,7 @@ Hit kbd:[?] to see all shortcuts.
   
   // Convert to HTML
   try {
-    asciidoctor.convertFile(indexPath, {
+    await asciidoctor.convertFile(indexPath, {
       safe: 'unsafe',
       to_dir: docsDir,
       to_file: 'index.html',

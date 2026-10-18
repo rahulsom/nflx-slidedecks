@@ -7,12 +7,14 @@ import { fileURLToPath } from 'url';
 
 const require = createRequire(import.meta.url);
 
-const asciidoctor = require('@asciidoctor/core')();
+const asciidoctor = require('@asciidoctor/core');
 const asciidoctorRevealjs = require('@asciidoctor/reveal.js');
 const asciidoctorKroki = require('asciidoctor-kroki');
 
-asciidoctorRevealjs.register();
-asciidoctorKroki.register(asciidoctor.Extensions);
+asciidoctorRevealjs.register(asciidoctor.ConverterFactory);
+asciidoctor.Extensions.register(function (this: any) {
+  asciidoctorKroki.register(this);
+});
 
 const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 
@@ -194,7 +196,7 @@ export async function buildPresentation(presentationName: string): Promise<void>
   });
   
   try {
-    const html = asciidoctor.convertFile(indexFile, {
+    const html = await asciidoctor.convertFile(indexFile, {
       safe: 'unsafe',
       backend: 'revealjs',
       to_dir: buildDir,
